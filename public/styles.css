@@ -1,0 +1,26 @@
+body { font-family: Arial, sans-serif; }
+h1 { text-align: center; }
+#courses { display: flex; flex-wrap: wrap; }
+.course { border: 1px solid #ccc; padding: 10px; margin: 10px; }
+
+
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+nav {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-bottom: 20px;
+}
+
+.course {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin: 10px;
+    display: inline-block;
+    width: 200px;
+}

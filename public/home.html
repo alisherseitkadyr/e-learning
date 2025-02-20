@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <h1>Welcome to E-Learning</h1>
+    <nav>
+        <a href="profile.html">Profile</a>
+        <a href="courses.html">Courses</a>
+        <button onclick="logout()">Logout</button>
+    </nav>
+    <h2>Available Courses</h2>
+    <div id="courses"></div>
+
+    <script>
+        async function loadCourses() {
+            const response = await fetch('http://localhost:5000/courses');
+            const courses = await response.json();
+
+            const coursesDiv = document.getElementById('courses');
+            coursesDiv.innerHTML = '';
+            courses.forEach(course => {
+                const div = document.createElement('div');
+                div.className = 'course';
+                div.innerHTML = `<h3>${course.title}</h3><p>${course.description}</p>`;
+                coursesDiv.appendChild(div);
+            });
+        }
+
+        function logout() {
+            localStorage.removeItem('token');
+            window.location.href = 'login.html';
+        }
+
+        loadCourses();
+    </script>
+</body>
+</html>
