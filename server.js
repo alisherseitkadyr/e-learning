@@ -5,6 +5,9 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
+const User=require('./models/User');
+const Course=require('./models/Course');
+const Enrollment=require('./models/Enrollment');
 
 dotenv.config();
 const app = express();
@@ -13,51 +16,8 @@ app.use(bodyParser.json());
 app.use(express.static('public'))
 
 mongoose.connect('mongodb://127.0.0.1:27017/elearning', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-});
-mongoose.connect('mongodb://127.0.0.1:27017/elearning', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
 }).then(() => console.log('MongoDB Connected'))
 .catch(err => console.log(err));
-
-// User Schema
-const UserSchema = new mongoose.Schema({
-    username: String,
-    email: String,
-    password: String,
-    role: { type: String, enum: ['student', 'instructor', 'admin'], default: 'student' }
-});
-const User = mongoose.model('User', UserSchema);
-
-// Course Schema
-const CourseSchema = new mongoose.Schema({
-    _id: String,
-    title: String,
-    description: String,
-    category: String,
-    price: Number,
-    rating: Number,
-    instructorId: mongoose.Schema.Types.ObjectId,
-    modules: [
-        {
-            title: String,
-            content: String,
-            video_url: String
-        }
-    ]
-});
-const Course = mongoose.model('Course', CourseSchema);
-
-// Enrollment Schema
-const EnrollmentSchema = new mongoose.Schema({
-    userId: mongoose.Schema.Types.ObjectId,
-    courseId: mongoose.Schema.Types.ObjectId,
-    progress: { type: Number, default: 0 },
-    completed: { type: Boolean, default: false }
-});
-const Enrollments = mongoose.model('Enrollments', EnrollmentSchema);
 
 function authMiddleware(req, res, next) {
     const token = req.headers.authorization?.split(" ")[1];
@@ -122,9 +82,15 @@ app.get('/courses', async (req, res) => {
     res.json(courses);
 });
 
-app.get('/enrolled', async (req,res) =>{
-    const enrolled = await Enrollments.find();
-    res.json(enrolled)
+app.get('/enrolled',authMiddleware, async (req,res) =>{
+    try {
+        const userId = req.user.userId;
+        console.log(req.user);
+        const enrolled = await Enrollment.find({userId: userId}).populate('courseId');
+        res.json(enrolled)
+    } catch (error) {
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
 });
 
 app.get('/profile', async (req, res) => {
@@ -143,7 +109,7 @@ app.get('/profile', async (req, res) => {
 // Enroll in Course
 app.post('/enroll', authMiddleware, async (req, res) => {
     const { courseId } = req.body;
-    const enrollment = new Enrollments({ userId: req.user.userId, courseId });
+    const enrollment = new Enrollment({ userId: req.user.userId, courseId });
     await enrollment.save();
     res.json({ message: 'Enrolled successfully' });
 });

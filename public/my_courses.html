@@ -69,6 +69,7 @@
             });
 
             const courses = await response.json();
+            console.log(courses)
             const courseList = document.getElementById('course-list');
             courseList.innerHTML = '';
 
@@ -81,14 +82,14 @@
                 const div = document.createElement('div');
                 div.className = 'course-card';
                 div.innerHTML = `
-                    <img src="${course.image}" alt="${course.title}">
-                    <h3>${course.title}</h3>
-                    <p>${course.description}</p>
+                    <img src="${course.courseId.image}" alt="${course.courseId.title}">
+                    <h3>${course.courseId.title}</h3>
+                    <p>${course.courseId.description}</p>
                     <div class="progress-container">
                         <div class="progress-bar" style="width: ${course.progress}%"></div>
                     </div>
                     <p>Progress: ${course.progress}%</p>
-                    <button onclick="continueCourse('${course._id}')" class="continue-btn">Continue</button>
+                    <button onclick="continueCourse('${course.courseId._id}')" class="continue-btn">Continue</button>
                 `;
                 courseList.appendChild(div);
             });
