@@ -3,19 +3,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
+    <title>Home - E-Learning</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="footer.css">
 </head>
 <body>
-    <h1>Welcome to E-Learning</h1>
-    <nav>
-        <a href="profile.html">Profile</a>
-        <a href="courses.html">Courses</a>
-        <button onclick="logout()">Logout</button>
+    <nav class="navbar">
+        <div class="logo">E-Learning</div>
+        <ul class="nav-links">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="my_courses.html">Courses</a></li>
+            <li id="profile-link" style="display: none;"><a href="profile.html">Profile</a></li>
+            <li id="login-link" style="display: block;"><a href="auth.html">auth</a></li>
+            <li id="logout-link" style="display: none;"><button class="logout-btn" onclick="logout()">Logout</button></li>
+        </ul>
     </nav>
-    <h2>Available Courses</h2>
-    <div id="courses"></div>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h1>Welcome to E-Learning Platform</h1>
+            <p>Start your journey with expert-led courses!</p>
+            <a href="courses.html" class="btn">Explore Courses</a>
+        </div>
+    </header>
+    
+    <section class="courses">
+        <h2>Available Courses</h2>
+        <div id="courses" class="course-container"></div>
+    </section>
 
     <footer class="footer">
         <div class="footer-container">
@@ -26,7 +41,7 @@
             <div class="footer-section">
                 <h3>Quick Links</h3>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="home.html">Home</a></li>
                     <li><a href="courses.html">Courses</a></li>
                     <li><a href="my_courses.html">My Courses</a></li>
                     <li><a href="profile.html">Profile</a></li>
@@ -42,28 +57,47 @@
         <p class="footer-bottom">© 2025 E-Learning Platform. All rights reserved.</p>
     </footer>
     
-
+    
     <script>
+        document.addEventListener("DOMContentLoaded", () => {
+        const token = localStorage.getItem("token");
+
+        if (token) {
+            document.getElementById("login-link").style.display = "none";
+            document.getElementById("profile-link").style.display = "block";
+            document.getElementById("logout-link").style.display = "block";
+        } else {
+            document.getElementById("login-link").style.display = "block";
+            document.getElementById("profile-link").style.display = "none";
+            document.getElementById("logout-link").style.display = "none";
+        }
+    });
         async function loadCourses() {
             const response = await fetch('http://localhost:5000/courses');
             const courses = await response.json();
-
             const coursesDiv = document.getElementById('courses');
             coursesDiv.innerHTML = '';
+    
             courses.forEach(course => {
                 const div = document.createElement('div');
-                div.className = 'course';
-                div.innerHTML = `<h3>${course.title}</h3><p>${course.description}</p>`;
+                div.className = 'course-card';
+                div.innerHTML = `
+                    <img src="${course.image}" alt="${course.title}">
+                    <h3>${course.title}</h3>
+                    <p>${course.description}</p>
+                    <button class="enroll-btn">Enroll Now</button>
+                `;
                 coursesDiv.appendChild(div);
             });
         }
-
         function logout() {
-            localStorage.removeItem('token');
-            window.location.href = 'login.html';
+        localStorage.removeItem('token');
+        location.reload();
         }
-
+    
         loadCourses();
     </script>
+    
+    
 </body>
 </html>

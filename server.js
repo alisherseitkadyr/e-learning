@@ -10,7 +10,7 @@ dotenv.config();
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static('public'))
 
 mongoose.connect('mongodb://127.0.0.1:27017/elearning', {
     useNewUrlParser: true,
@@ -70,6 +70,10 @@ const authMiddleware = (req, res, next) => {
     });
 };
 
+app.get('/', (req, res) => {
+    res.sendFile(__dirname + '/public/home.html'); // Или home.html, если нужно
+});
+
 // Register User
 app.post('/register', async (req, res) => {
     const { username, email, password, role } = req.body;
@@ -125,6 +129,7 @@ app.get('/courses', async (req, res) => {
     const courses = await Course.find();
     res.json(courses);
 });
+
 app.get('/profile', async (req, res) => {
     try {
         const token = req.headers.authorization?.split(' ')[1];
@@ -137,7 +142,6 @@ app.get('/profile', async (req, res) => {
         res.status(500).json({ message: 'Error fetching profile' });
     }
 });
-
 
 // Enroll in Course
 app.post('/enroll', authMiddleware, async (req, res) => {
@@ -155,3 +159,4 @@ app.put('/progress', authMiddleware, async (req, res) => {
 });
 
 app.listen(5000, () => console.log('Server running on http://localhost:5000'));
+      

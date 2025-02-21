@@ -18,6 +18,7 @@ fetch('http://localhost:5000/courses')
         });
     });
 
+
 function enroll(courseId) {
     if (!token) {
         alert('Please log in to enroll');
@@ -30,9 +31,4 @@ function enroll(courseId) {
     })
     .then(response => response.json())
     .then(data => alert(data.message));
-}
-
-function logout() {
-    localStorage.removeItem('token');
-    location.reload();
 }

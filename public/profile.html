@@ -9,9 +9,9 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="logo"><a href="index.html">E-Learning</a></div>
+        <div class="logo"><a href="home.html">E-Learning</a></div>
         <ul class="nav-links">
-            <li><a href="index.html">Home</a></li>
+            <li><a href="home.html">Home</a></li>
             <li><a href="courses.html">Courses</a></li>
             <li class="dropdown">
                 <button class="dropbtn">Profile ▼</button>
@@ -39,7 +39,7 @@
             const token = localStorage.getItem('token');
             if (!token) {
                 alert("Please log in first!");
-                window.location.href = 'login.html';
+                window.location.href = 'auth.html';
                 return;
             }
     
