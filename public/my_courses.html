@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Courses</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo"><a href="index.html">E-Learning</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="courses.html">All Courses</a></li>
+            <li><a href="my_courses.html">My Courses</a></li>
+            <li class="dropdown">
+                <button class="dropbtn">Profile ▼</button>
+                <div class="dropdown-content">
+                    <a href="profile.html">View Profile</a>
+                    <a href="#" onclick="logout()">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+
+    <section class="my-courses">
+        <h2>My Courses</h2>
+        <div id="course-list"></div>
+    </section>
+
+    <script>
+        async function loadMyCourses() {
+            const token = localStorage.getItem('token');
+            if (!token) {
+                alert("Please log in first!");
+                window.location.href = 'login.html';
+                return;
+            }
+
+            const response = await fetch('http://localhost:5000/my_courses', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+
+            const courses = await response.json();
+            const courseList = document.getElementById('course-list');
+            courseList.innerHTML = '';
+
+            if (courses.length === 0) {
+                courseList.innerHTML = "<p>You haven't enrolled in any courses yet.</p>";
+                return;
+            }
+
+            courses.forEach(course => {
+                const div = document.createElement('div');
+                div.className = 'course-card';
+                div.innerHTML = `
+                    <img src="${course.image}" alt="${course.title}">
+                    <h3>${course.title}</h3>
+                    <p>${course.description}</p>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: ${course.progress}%"></div>
+                    </div>
+                    <p>Progress: ${course.progress}%</p>
+                    <button onclick="continueCourse('${course._id}')" class="continue-btn">Continue</button>
+                `;
+                courseList.appendChild(div);
+            });
+        }
+
+        function continueCourse(courseId) {
+            window.location.href = `course_details.html?id=${courseId}`;
+        }
+
+        loadMyCourses();
+    </script>
+</body>
+</html>

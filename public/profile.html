@@ -7,10 +7,32 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <h1>User Profile</h1>
-    <div id="profile"></div>
-    <button onclick="logout()">Logout</button>
+    <nav class="navbar">
+        <div class="logo"><a href="index.html">E-Learning</a></div>
+        <ul class="nav-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="courses.html">Courses</a></li>
+            <li class="dropdown">
+                <button class="dropbtn">Profile ▼</button>
+                <div class="dropdown-content">
+                    <a href="profile.html">View Profile</a>
+                    <a href="#" onclick="logout()">Logout</a>
+                </div>
+            </li>
+        </ul>
+    </nav>
+    
 
+    <section class="profile-container">
+        <div class="profile-card">
+            <img src="user-avatar.png" alt="User Avatar" class="profile-pic">
+            <h2 id="username"></h2>
+            <p>Email: <span id="email"></span></p>
+            <p>Enrolled Courses: <span id="enrolled"></span></p>
+            <button onclick="logout()" class="logout-btn">Logout</button>
+        </div>
+    </section>
+    
     <script>
         async function loadProfile() {
             const token = localStorage.getItem('token');
@@ -19,24 +41,19 @@
                 window.location.href = 'login.html';
                 return;
             }
-
+    
             const response = await fetch('http://localhost:5000/profile', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-
+    
             const user = await response.json();
-            document.getElementById('profile').innerHTML = `
-                <p><strong>Username:</strong> ${user.username}</p>
-                <p><strong>Email:</strong> ${user.email}</p>
-            `;
+            document.getElementById('username').innerText = user.username;
+            document.getElementById('email').innerText = user.email;
+            document.getElementById('enrolled').innerText = user.enrolled_courses.length;
         }
-
-        function logout() {
-            localStorage.removeItem('token');
-            window.location.href = 'login.html';
-        }
-
+    
         loadProfile();
     </script>
+    
 </body>
 </html>
