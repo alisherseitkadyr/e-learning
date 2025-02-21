@@ -135,7 +135,7 @@ body {
 }
 
 .enroll-btn {
-    background: #3498db;
+    background: #2ecc71;
     padding: 8px 15px;
     color: white;
     border: none;
@@ -145,7 +145,7 @@ body {
 }
 
 .enroll-btn:hover {
-    background: #2980b9;
+    background: #27ae60;
 }
 
 /* Profile Page */
@@ -186,39 +186,44 @@ body {
 }
 
 /* My Courses Page */
-.my-courses {
-    padding: 30px;
-    text-align: center;
+#course-list {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping to a new line if needed */
+    gap: 20px; /* Adds spacing between cards */
+    overflow-x: auto; /* Enables horizontal scrolling if needed */
+    padding: 10px;
 }
 
 .course-card {
-    background: white;
+    width: 250px; /* Adjust width as needed */
+    border: 1px solid #ddd;
+    border-radius: 10px;
     padding: 15px;
-    border-radius: 8px;
-    width: 300px;
+    background: #fff;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1);
     text-align: center;
-    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px auto;
+    flex-shrink: 0; /* Prevents shrinking */
 }
 
 .course-card img {
     width: 100%;
-    border-radius: 8px;
+    height: auto;
+    border-radius: 10px;
 }
 
 .progress-container {
     width: 100%;
-    background: #ddd;
+    background: #eee;
     border-radius: 5px;
-    height: 10px;
-    margin: 10px 0;
+    margin-top: 10px;
 }
 
 .progress-bar {
-    height: 10px;
-    background: #3498db;
+    height: 8px;
+    background: #4caf50;
     border-radius: 5px;
 }
+
 
 .continue-btn {
     background: #2ecc71;

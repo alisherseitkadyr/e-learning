@@ -1,0 +1,114 @@
+[{
+  "_id": {
+    "$oid": "67b8dbd9206f34f2ec4eeb88"
+  },
+  "courseId": {
+    "$oid": "67ab39113a495798944eeb88"
+  },
+  "title": "Lesson 1: Introduction",
+  "description": "This is the first lesson.",
+  "category": "Programming",
+  "videoUrl": "https://www.youtube.com/embed/W6NZfCO5SIk",
+  "content": "Learn the basics of JavaScript.",
+  "quiz": [
+    {
+      "question": "What is JavaScript?",
+      "options": [
+        "A language",
+        "A framework",
+        "A library"
+      ],
+      "correctAnswer": "A language"
+    },
+    {
+      "question": "Which HTML tag is used to define a hyperlink?",
+      "options": [
+        "A: <link>",
+        "B: <a>",
+        "C: <href>",
+        "D: <url>"
+      ],
+      "correctAnswer": "B: <a>"
+    },
+    {
+      "question": "Which of the following is a JavaScript framework?",
+      "options": [
+        "A: React",
+        "B: Django",
+        "C: Flask",
+        "D: Laravel"
+      ],
+      "correctAnswer": "A: React"
+    },
+    {
+      "question": "What does the acronym HTTP stand for?",
+      "options": [
+        "A: Hypertext Transfer Protocol",
+        "B: Hyperlink Transmission Process",
+        "C: High-Level Text Protocol",
+        "D: Hyper Transfer Text Process"
+      ],
+      "correctAnswer": "A: Hypertext Transfer Protocol"
+    },
+    {
+      "question": "Which of the following is NOT a programming language?",
+      "options": [
+        "A: Python",
+        "B: Java",
+        "C: HTML",
+        "D: C++"
+      ],
+      "correctAnswer": "C: HTML"
+    },
+    {
+      "question": "Which property is used in CSS to change text color?",
+      "options": [
+        "A: background-color",
+        "B: text-color",
+        "C: font-color",
+        "D: color"
+      ],
+      "correctAnswer": "D: color"
+    },
+    {
+      "question": "Which of the following is a backend language?",
+      "options": [
+        "A: JavaScript",
+        "B: Python",
+        "C: HTML",
+        "D: CSS"
+      ],
+      "correctAnswer": "B: Python"
+    },
+    {
+      "question": "What is the purpose of the <head> tag in HTML?",
+      "options": [
+        "A: To define the page's header",
+        "B: To store metadata and links to styles/scripts",
+        "C: To contain all the visible content",
+        "D: To create a navigation bar"
+      ],
+      "correctAnswer": "B: To store metadata and links to styles/scripts"
+    },
+    {
+      "question": "Which database is a NoSQL database?",
+      "options": [
+        "A: MySQL",
+        "B: PostgreSQL",
+        "C: MongoDB",
+        "D: SQLite"
+      ],
+      "correctAnswer": "C: MongoDB"
+    },
+    {
+      "question": "What is the primary function of CSS?",
+      "options": [
+        "A: To structure web pages",
+        "B: To add functionality to a website",
+        "C: To style web pages",
+        "D: To store data"
+      ],
+      "correctAnswer": "C: To style web pages"
+    }
+  ]
+}]

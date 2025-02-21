@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson Details</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        iframe {
+            width: 100%;
+            height: 400px;
+            border-radius: 10px;
+        }
+        .quiz-question {
+            margin-top: 20px;
+        }
+        .quiz-option {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            background-color: #ddd;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+        }
+        .quiz-option:hover {
+            background-color: #ccc;
+        }
+        .quiz-option.selected {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .quiz-option.correct {
+            background-color: #28a745;
+            color: white;
+        }
+        .quiz-option.incorrect {
+            background-color: #dc3545;
+            color: white;
+        }
+        #submit-btn {
+            margin-top: 20px;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            border-radius: 5px;
+        }
+        #submit-btn:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 id="lesson-title">Loading...</h1>
+    <p id="lesson-description"></p>
+
+    <div id="video-section"></div>
+    
+    <div id="lesson-content"></div>
+
+    <h2>Quiz</h2>
+    <div id="quiz-section"></div>
+    <button id="submit-btn">Submit Answers</button>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", async function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseId = urlParams.get("courseId");
+
+    if (!courseId) {
+        alert("Course ID is missing.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:5000/lessons?courseId=${courseId}`);
+        const lessons = await response.json();
+
+        if (lessons.length === 0) {
+            document.getElementById("lesson-title").textContent = "No lessons found.";
+            return;
+        }
+
+        const lesson = lessons[0]; // Assume first lesson for now
+        document.getElementById("lesson-title").textContent = lesson.title;
+        document.getElementById("lesson-description").textContent = lesson.description;
+        document.getElementById("video-section").innerHTML = `<iframe src="${lesson.videoUrl}" allowfullscreen></iframe>`;
+
+        loadQuiz(lesson.quiz);
+    } catch (error) {
+        console.error("Error fetching lessons:", error);
+    }
+});
+
+function loadQuiz(quiz) {
+    const quizSection = document.getElementById("quiz-section");
+    quizSection.innerHTML = "";
+
+    quiz.forEach((q, index) => {
+        const questionDiv = document.createElement("div");
+        questionDiv.classList.add("quiz-question");
+        questionDiv.innerHTML = `<p><strong>${q.question}</strong></p>`;
+
+        q.options.forEach((option, optionIndex) => {
+            const optionButton = document.createElement("button");
+            optionButton.classList.add("quiz-option");
+            optionButton.textContent = option;
+            optionButton.dataset.questionIndex = index;
+            optionButton.dataset.optionIndex = optionIndex;
+            optionButton.addEventListener("click", selectOption);
+            questionDiv.appendChild(optionButton);
+        });
+
+        quizSection.appendChild(questionDiv);
+    });
+
+    document.getElementById("submit-btn").addEventListener("click", () => checkAnswers(quiz));
+}
+
+function selectOption(event) {
+    const selectedOption = event.target;
+    const questionIndex = selectedOption.dataset.questionIndex;
+    const allOptions = document.querySelectorAll(`button[data-question-index="${questionIndex}"]`);
+
+    allOptions.forEach(option => option.classList.remove("selected"));
+    selectedOption.classList.add("selected");
+}
+
+function checkAnswers(quiz) {
+    const selectedAnswers = document.querySelectorAll(".quiz-option.selected");
+
+    if (selectedAnswers.length !== quiz.length) {
+        alert("Please answer all questions.");
+        return;
+    }
+
+    selectedAnswers.forEach(selected => {
+        const questionIndex = selected.dataset.questionIndex;
+        const optionIndex = selected.dataset.optionIndex;
+        const correctIndex = quiz[questionIndex].correctAnswer;
+
+        if (parseInt(optionIndex) === correctIndex) {
+            selected.classList.add("correct");
+        } else {
+            selected.classList.add("incorrect");
+        }
+    });
+
+    document.getElementById("submit-btn").disabled = true;
+}
+</script>
+
+</body>
+</html>

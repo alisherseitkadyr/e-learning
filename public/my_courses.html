@@ -12,7 +12,6 @@
         <div class="logo"><a href="home.html">E-Learning</a></div>
         <ul class="nav-links">
             <li><a href="home.html">Home</a></li>
-            <li><a href="courses.html">All Courses</a></li>
             <li><a href="my_courses.html">My Courses</a></li>
             <li class="dropdown">
                 <button class="dropbtn">Profile ▼</button>
@@ -96,8 +95,11 @@
         }
 
         function continueCourse(courseId) {
-            window.location.href = `course_details.html?id=${courseId}`;
-        }
+    window.location.href = `/lesson.html?courseId=${courseId}`;
+}
+
+
+
 
         loadMyCourses();
     </script>

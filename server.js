@@ -8,6 +8,7 @@ const dotenv = require('dotenv');
 const User=require('./models/User');
 const Course=require('./models/Course');
 const Enrollment=require('./models/Enrollment');
+const Lesson=require('./models/Lesson')
 
 dotenv.config();
 const app = express();
@@ -65,7 +66,6 @@ app.post('/login', async (req, res) => {
     res.json({ token });
 });
 
-
 // Add Course (Only Instructors)
 app.post('/courses', authMiddleware, async (req, res) => {
     if (req.user.role !== 'instructor' && req.user.role !== 'admin') {
@@ -85,26 +85,55 @@ app.get('/courses', async (req, res) => {
 app.get('/enrolled',authMiddleware, async (req,res) =>{
     try {
         const userId = req.user.userId;
-        console.log(req.user);
         const enrolled = await Enrollment.find({userId: userId}).populate('courseId');
         res.json(enrolled)
     } catch (error) {
         res.status(500).json({ message: "Server error", error: error.message });
     }
 });
-
-app.get('/profile', async (req, res) => {
+app.get('/lesson/:courseId', async (req, res) => {
     try {
-        const token = req.headers.authorization?.split(' ')[1];
-        if (!token) return res.status(401).json({ message: 'Unauthorized' });
+        console.log("Requested Course ID:", req.params.courseId);
 
-        const decoded = jwt.verify(token, 'secret');
-        const user = await User.findById(decoded.userId).select('-password');
-        res.json(user);
+        if (!mongoose.Types.ObjectId.isValid(req.params.courseId)) {
+            return res.status(400).json({ message: 'Invalid Course ID' });
+        }
+
+        const lessons = await Lesson.find({ courseId: req.params.courseId });
+
+        if (lessons.length === 0) {
+            return res.status(404).json({ message: 'No lessons found for this course' });
+        }
+
+        res.json(lessons);
     } catch (error) {
-        res.status(500).json({ message: 'Error fetching profile' });
+        console.error("Error fetching lessons:", error);
+        res.status(500).json({ message: 'Server error', error });
     }
 });
+app.get('/lessons', async (req, res) => {
+    try {
+        const courseId = req.query.courseId;
+        console.log("Requested Course sssID:", courseId);
+
+        if (!mongoose.Types.ObjectId.isValid(courseId)) {
+            return res.status(400).json({ message: 'Invalid Course ID' });
+        }
+
+        const lessons = await Lesson.find({ courseId });
+
+        if (lessons.length === 0) {
+            return res.status(404).json({ message: 'No lessons found for this course' });
+        }
+
+        res.json(lessons);
+    } catch (error) {
+        console.error("Error fetching lessons:", error);
+        res.status(500).json({ message: 'Server error', error });
+    }
+});
+
+
 
 // Enroll in Course
 app.post('/enroll', authMiddleware, async (req, res) => {
