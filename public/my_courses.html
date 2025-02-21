@@ -64,7 +64,7 @@
                 return;
             }
 
-            const response = await fetch('http://localhost:5000/my_courses', {
+            const response = await fetch('http://localhost:5000/enrolled', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
 
@@ -100,5 +100,6 @@
 
         loadMyCourses();
     </script>
+       <script src="script.js"></script>
 </body>
 </html>

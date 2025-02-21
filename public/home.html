@@ -85,19 +85,14 @@
                     <img src="${course.image}" alt="${course.title}">
                     <h3>${course.title}</h3>
                     <p>${course.description}</p>
-                    <button class="enroll-btn">Enroll Now</button>
+                    <button class="enroll-btn" onclick="enroll('${course._id}')">Enroll Now</button>
                 `;
                 coursesDiv.appendChild(div);
             });
         }
-        function logout() {
-        localStorage.removeItem('token');
-        location.reload();
-        }
     
         loadCourses();
     </script>
-    
-    
+       <script src="script.js"></script>
 </body>
 </html>

@@ -78,7 +78,9 @@
         });
 
         const result = await response.json();
-        alert(result.message);
+        if (result.message!=undefined){
+            alert(result.message);
+        }
 
         if (response.ok && isLogin) {
             localStorage.setItem("token", result.token);
@@ -86,7 +88,6 @@
         }
     });
 });
-
     </script>
 </body>
 </html>

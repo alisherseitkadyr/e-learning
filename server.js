@@ -33,6 +33,7 @@ const User = mongoose.model('User', UserSchema);
 
 // Course Schema
 const CourseSchema = new mongoose.Schema({
+    _id: String,
     title: String,
     description: String,
     category: String,
@@ -56,25 +57,29 @@ const EnrollmentSchema = new mongoose.Schema({
     progress: { type: Number, default: 0 },
     completed: { type: Boolean, default: false }
 });
-const Enrollment = mongoose.model('Enrollment', EnrollmentSchema);
+const Enrollments = mongoose.model('Enrollments', EnrollmentSchema);
 
-// Middleware for authentication
-const authMiddleware = (req, res, next) => {
-    const token = req.headers['authorization'];
-    if (!token) return res.status(403).json({ message: 'Access Denied' });
-    
+function authMiddleware(req, res, next) {
+    const token = req.headers.authorization?.split(" ")[1];
+
+    if (!token) {
+        return res.status(401).json({ message: "No token provided" });
+    }
+
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
-        if (err) return res.status(403).json({ message: 'Invalid Token' });
+        if (err) {
+            console.log("Token verification error:", err.message);
+            return res.status(403).json({ message: "Invalid token" });
+        }
         req.user = decoded;
         next();
     });
-};
+}
 
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/public/home.html'); // Или home.html, если нужно
 });
 
-// Register User
 app.post('/register', async (req, res) => {
     const { username, email, password, role } = req.body;
     const hashedPassword = await bcrypt.hash(password, 12);
@@ -83,34 +88,21 @@ app.post('/register', async (req, res) => {
     res.json({ message: 'User registered successfully' });
 });
 
-// Login User
 app.post('/login', async (req, res) => {
-    try {
-        const { email, password } = req.body;
-        console.log("Login attempt for:", email); // Debugging
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
 
-        const user = await User.findOne({ email });
-        if (!user) {
-            console.log("User not found");
-            return res.status(401).json({ message: 'Invalid credentials' });
-        }
-
-        console.log("User found:", user.email); // Debugging
-
-        const isPasswordValid = await bcrypt.compare(password, user.password);
-        if (!isPasswordValid) {
-            console.log("Incorrect password");
-            return res.status(401).json({ message: 'Invalid credentials' });
-        }
-
-        console.log("Password matched"); // Debugging
-        const token = jwt.sign({ userId: user._id }, 'secret', { expiresIn: '1h' });
-
-        res.json({ token, message: 'Login successful' });
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error' });
+    if (!user || !(await bcrypt.compare(password, user.password))) {
+        return res.status(401).json({ message: "Invalid email or password" });
     }
+
+    const token = jwt.sign(
+        { userId: user._id },
+        process.env.JWT_SECRET,  // Используем правильный секретный ключ
+        { expiresIn: "1h" }
+    );
+
+    res.json({ token });
 });
 
 
@@ -130,6 +122,11 @@ app.get('/courses', async (req, res) => {
     res.json(courses);
 });
 
+app.get('/enrolled', async (req,res) =>{
+    const enrolled = await Enrollments.find();
+    res.json(enrolled)
+});
+
 app.get('/profile', async (req, res) => {
     try {
         const token = req.headers.authorization?.split(' ')[1];
@@ -146,7 +143,7 @@ app.get('/profile', async (req, res) => {
 // Enroll in Course
 app.post('/enroll', authMiddleware, async (req, res) => {
     const { courseId } = req.body;
-    const enrollment = new Enrollment({ userId: req.user.userId, courseId });
+    const enrollment = new Enrollments({ userId: req.user.userId, courseId });
     await enrollment.save();
     res.json({ message: 'Enrolled successfully' });
 });
