@@ -82,10 +82,15 @@
     <h2>Quiz</h2>
     <div id="quiz-section"></div>
     <button id="submit-btn">Submit Answers</button>
+    <button href="my_courses.html">Exit</button>
 </div>
 
 <script>
+    const token = localStorage.getItem("token");
 document.addEventListener("DOMContentLoaded", async function () {
+    if(!token){
+        location.replace('auth.html')
+    }
     const urlParams = new URLSearchParams(window.location.search);
     const courseId = urlParams.get("courseId");
 

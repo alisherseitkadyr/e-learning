@@ -39,7 +39,6 @@
                 <h3>Quick Links</h3>
                 <ul>
                     <li><a href="home.html">Home</a></li>
-                    <li><a href="courses.html">Courses</a></li>
                     <li><a href="my_courses.html">My Courses</a></li>
                     <li><a href="profile.html">Profile</a></li>
                 </ul>
@@ -58,14 +57,13 @@
     <script>
         const token = localStorage.getItem("token");
         document.addEventListener("DOMContentLoaded", () => {
+            console.log(token)
         if (token) {
             document.getElementById("login-link").style.display = "none";
             document.getElementById("profile-link").style.display = "block";
             document.getElementById("logout-link").style.display = "block";
         } else {
-            document.getElementById("login-link").style.display = "block";
-            document.getElementById("profile-link").style.display = "none";
-            document.getElementById("logout-link").style.display = "none";
+            location.replace('auth.html')
         }
     });
         async function loadCourses() {
@@ -79,7 +77,6 @@
                     headers: { 'Authorization': `Bearer ${token}` }
                 });
                 const enrolled=await response.json();
-                console.log(enrolled)
                 const div = document.createElement('div');
                 div.className = 'course-card';
                 div.innerHTML=``
