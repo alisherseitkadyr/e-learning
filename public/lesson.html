@@ -53,7 +53,7 @@
             background-color: #dc3545;
             color: white;
         }
-        #submit-btn {
+        #submit-btn,#exit-btn {
             margin-top: 20px;
             padding: 10px;
             font-size: 16px;
@@ -64,9 +64,16 @@
             width: 100%;
             border-radius: 5px;
         }
+        #exit-btn{
+            background-color: #dc3545;
+        }
         #submit-btn:hover {
             background-color: #0056b3;
         }
+        #exit-btn:hover{
+            background-color: #a3212d
+        }
+
     </style>
 </head>
 <body>
@@ -82,7 +89,7 @@
     <h2>Quiz</h2>
     <div id="quiz-section"></div>
     <button id="submit-btn">Submit Answers</button>
-    <button href="my_courses.html">Exit</button>
+    <button id="exit-btn" onclick="location.assign('my_courses.html')">Return</button>
 </div>
 
 <script>
