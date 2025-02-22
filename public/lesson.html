@@ -42,7 +42,7 @@
             background-color: #ccc;
         }
         .quiz-option.selected {
-            background-color: #4CAF50;
+            background-color: #4c6daf;
             color: white;
         }
         .quiz-option.correct {
@@ -155,19 +155,26 @@ function checkAnswers(quiz) {
         alert("Please answer all questions.");
         return;
     }
-
+    let correctAmount=0
     selectedAnswers.forEach(selected => {
         const questionIndex = selected.dataset.questionIndex;
         const optionIndex = selected.dataset.optionIndex;
         const correctIndex = quiz[questionIndex].correctAnswer;
+        console.log(questionIndex)
+        console.log(parseInt(optionIndex))
+        console.log(correctIndex)
 
-        if (parseInt(optionIndex) === correctIndex) {
+        if (parseInt(optionIndex) === parseInt(correctIndex)) {
             selected.classList.add("correct");
+            correctAmount+=1;
         } else {
             selected.classList.add("incorrect");
         }
     });
-
+    document.querySelectorAll('.quiz-option').forEach(button=>{
+        button.disabled=true;
+    })
+    document.getElementById(("submit-btn")).innerHTML =correctAmount+"/"+selectedAnswers.length;
     document.getElementById("submit-btn").disabled = true;
 }
 </script>

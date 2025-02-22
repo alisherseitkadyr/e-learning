@@ -18,7 +18,7 @@
         "A framework",
         "A library"
       ],
-      "correctAnswer": "A language"
+      "correctAnswer": 0
     },
     {
       "question": "Which HTML tag is used to define a hyperlink?",
@@ -28,7 +28,7 @@
         "C: <href>",
         "D: <url>"
       ],
-      "correctAnswer": "B: <a>"
+      "correctAnswer": 1
     },
     {
       "question": "Which of the following is a JavaScript framework?",
@@ -38,7 +38,7 @@
         "C: Flask",
         "D: Laravel"
       ],
-      "correctAnswer": "A: React"
+      "correctAnswer": 0
     },
     {
       "question": "What does the acronym HTTP stand for?",
@@ -48,7 +48,7 @@
         "C: High-Level Text Protocol",
         "D: Hyper Transfer Text Process"
       ],
-      "correctAnswer": "A: Hypertext Transfer Protocol"
+      "correctAnswer": 0
     },
     {
       "question": "Which of the following is NOT a programming language?",
@@ -58,7 +58,7 @@
         "C: HTML",
         "D: C++"
       ],
-      "correctAnswer": "C: HTML"
+      "correctAnswer": 2
     },
     {
       "question": "Which property is used in CSS to change text color?",
@@ -68,7 +68,7 @@
         "C: font-color",
         "D: color"
       ],
-      "correctAnswer": "D: color"
+      "correctAnswer": 3
     },
     {
       "question": "Which of the following is a backend language?",
@@ -78,7 +78,7 @@
         "C: HTML",
         "D: CSS"
       ],
-      "correctAnswer": "B: Python"
+      "correctAnswer": 1
     },
     {
       "question": "What is the purpose of the <head> tag in HTML?",
@@ -88,7 +88,7 @@
         "C: To contain all the visible content",
         "D: To create a navigation bar"
       ],
-      "correctAnswer": "B: To store metadata and links to styles/scripts"
+      "correctAnswer": 1
     },
     {
       "question": "Which database is a NoSQL database?",
@@ -98,7 +98,7 @@
         "C: MongoDB",
         "D: SQLite"
       ],
-      "correctAnswer": "C: MongoDB"
+      "correctAnswer": 2
     },
     {
       "question": "What is the primary function of CSS?",
@@ -108,7 +108,7 @@
         "C: To style web pages",
         "D: To store data"
       ],
-      "correctAnswer": "C: To style web pages"
+      "correctAnswer": 2
     }
   ]
 }]

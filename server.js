@@ -65,7 +65,15 @@ app.post('/login', async (req, res) => {
 
     res.json({ token });
 });
-
+app.get('/profile', authMiddleware, async (req, res) => {
+    try {
+        const userId=req.user.userId;
+        const user=await User.findOne({_id:userId})
+        res.json({user: user});
+    } catch (err) {
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+});
 // Add Course (Only Instructors)
 app.post('/courses', authMiddleware, async (req, res) => {
     if (req.user.role !== 'instructor' && req.user.role !== 'admin') {
@@ -138,6 +146,11 @@ app.get('/lessons', async (req, res) => {
 // Enroll in Course
 app.post('/enroll', authMiddleware, async (req, res) => {
     const { courseId } = req.body;
+    const checkEnrolled= await Enrollment.findOne({courseId: courseId,userId:req.user.userId})
+    console.log(checkEnrolled);
+    if(checkEnrolled){
+        return res.status(400).json({ message: "Already enrolled" });
+    }
     const enrollment = new Enrollment({ userId: req.user.userId, courseId });
     await enrollment.save();
     res.json({ message: 'Enrolled successfully' });

@@ -26,7 +26,6 @@
 
     <section class="profile-container">
         <div class="profile-card">
-            <img src="user-avatar.png" alt="User Avatar" class="profile-pic">
             <h2 id="username"></h2>
             <p>Email: <span id="email"></span></p>
             <p>Enrolled Courses: <span id="enrolled"></span></p>
@@ -46,14 +45,19 @@
             const response = await fetch('http://localhost:5000/profile', {
                 headers: { 'Authorization': `Bearer ${token}` }
             });
-    
-            const user = await response.json();
+            const res = await response.json();
+            const user=res.user
+            console.log(user)
             document.getElementById('username').innerText = user.username;
             document.getElementById('email').innerText = user.email;
-            document.getElementById('enrolled').innerText = user.enrolled_courses.length;
+            const enrollment = await fetch('http://localhost:5000/enrolled', {
+                headers: { 'Authorization': `Bearer ${token}` }
+            });
+            const enrolled_courses=await enrollment.json();
+            document.getElementById('enrolled').innerText = enrolled_courses.length;
         }
-        
-    
+
+
         loadProfile();
     </script>
     <script src="script.js"></script>
