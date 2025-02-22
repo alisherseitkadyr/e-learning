@@ -163,7 +163,6 @@ function selectOption(event) {
 async function checkAnswers(quiz, course) {
     const token = localStorage.getItem('token');
     if (!token) {
-        alert("Please log in first!");
         window.location.href = 'auth.html';
         return;
     }

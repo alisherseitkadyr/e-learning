@@ -4,7 +4,8 @@ const LessonSchema = new mongoose.Schema({
     courseId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Course', // Reference to the Course model
-        required: true
+        required: true,
+        index:true
     },
     title: String,
     description: String,
