@@ -1,0 +1,216 @@
+[{
+  "_id": {
+    "$oid": "67ab39113a495798944eeb86"
+  },
+  "title": "JavaScript Basics",
+  "description": "Learn the fundamentals of JavaScript.",
+  "content": "Introduction to JS, Variables, Functions...",
+  "image": "https://repository-images.githubusercontent.com/188960113/88587c80-8773-11e9-8f1f-bcbc39e82ce7"
+},
+{
+  "_id": {
+    "$oid": "67ab39113a495798944eeb87"
+  },
+  "title": "Python for Beginners",
+  "description": "Start coding in Python.",
+  "content": "Syntax, Data Types, Loops...",
+  "image": "https://i.ytimg.com/vi/NoVL-sBfAQc/maxresdefault.jpg"
+},
+{
+  "_id": {
+    "$oid": "67ab39113a495798944eeb88"
+  },
+  "title": "Web Development with HTML & CSS",
+  "description": "Build websites from scratch.",
+  "content": "HTML Structure, CSS Styling, Flexbox...",
+  "image": "https://avatars.mds.yandex.net/i?id=3fa03aeb01dae33cbe5c2c30755931cd_l-5859282-images-thumbs&n=13"
+},
+{
+  "_id": {
+    "$oid": "67ab39113a495798944eeb89"
+  },
+  "title": "React.js Crash Course",
+  "description": "Master React basics quickly.",
+  "content": "Components, Props, State...",
+  "image": "https://blog.logrocket.com/wp-content/uploads/2024/08/building-telegram-mini-apps-react.png"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb86"
+  },
+  "title": "Python for Beginners",
+  "description": "Learn the basics of Python programming, including syntax, data types, and simple algorithms.",
+  "category": "Programming",
+  "image": "https://habrastorage.org/webt/js/tu/u-/jstuu--u6evrekj-zzuh4ljo9io.jpeg"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb87"
+  },
+  "title": "Web Development with HTML, CSS & JavaScript",
+  "description": "Build modern and responsive websites using HTML, CSS, and JavaScript.",
+  "category": "Web Development",
+  "image": "https://www.retail.ru/upload/medialibrary/fd2/8b02esuvy6s7n3m2z84j4ph3c2sm5ver/Dlya-retail.ru.jpg"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb88"
+  },
+  "title": "Java Fundamentals",
+  "description": "Understand Java basics, object-oriented programming, and build small applications.",
+  "category": "Programming",
+  "image": "https://avatars.mds.yandex.net/i?id=80c96663043331180a2822d1bc31959d_l-5333360-images-thumbs&n=13"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb89"
+  },
+  "title": "Data Science with Python",
+  "description": "Analyze and visualize data using Python libraries like Pandas, NumPy, and Matplotlib.",
+  "category": "Data Science",
+  "image": "https://i.pinimg.com/736x/46/df/c2/46dfc20f31c077e9d3da25cf1b1b05ee.jpg"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb8a"
+  },
+  "title": "Machine Learning with TensorFlow",
+  "description": "Get hands-on experience with machine learning using TensorFlow and deep learning models.",
+  "category": "AI & Machine Learning",
+  "image": "https://avatars.mds.yandex.net/i?id=72f97fb6b5ffe7213b097929507080fa_l-10639597-images-thumbs&n=13"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb8b"
+  },
+  "title": "Cybersecurity Essentials",
+  "description": "Learn how to protect systems from cyber threats and secure online data.",
+  "category": "Cybersecurity",
+  "image": "https://avatars.mds.yandex.net/i?id=45cd09b5589dcd05a2ee90c9d70c11cc_l-9853960-images-thumbs&n=13"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb8c"
+  },
+  "title": "Mobile App Development with React Native",
+  "description": "Create cross-platform mobile apps using React Native and Expo.",
+  "category": "Mobile Development",
+  "image": "https://i.pinimg.com/originals/3a/52/51/3a52519410d67026a122be9e0e9ad721.png"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb8d"
+  },
+  "title": "Cloud Computing with AWS",
+  "description": "Explore Amazon Web Services (AWS) and learn cloud computing fundamentals.",
+  "category": "Cloud Computing",
+  "image": "https://i.ytimg.com/vi/9KEZDwLa9XU/maxresdefault.jpg"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb8e"
+  },
+  "title": "SQL & Database Management",
+  "description": "Master SQL queries and database design for managing large-scale data.",
+  "category": "Database",
+  "image": "https://miro.medium.com/v2/resize:fit:1200/0*4Ah95itlnSr3bvb0.jpg"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb8f"
+  },
+  "title": "Ethical Hacking & Penetration Testing",
+  "description": "Learn penetration testing techniques and how to ethically hack systems.",
+  "category": "Cybersecurity",
+  "image": "https://www.dgl.ru/wp-content/uploads/2022/06/3128902_49a3-3-2048x1152-1.jpeg"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb90"
+  },
+  "title": "UI/UX Design Principles",
+  "description": "Discover the fundamentals of user interface (UI) and user experience (UX) design.",
+  "category": "Design",
+  "image": "https://siabit.ru/wp-content/uploads/2023/10/3-14.jpg"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb91"
+  },
+  "title": "Blockchain & Cryptocurrency",
+  "description": "Understand blockchain technology and how cryptocurrencies work.",
+  "category": "Blockchain",
+  "image": "https://avatars.mds.yandex.net/i?id=5d854b2675c21855c3c8715b904bff71_l-8179254-images-thumbs&n=13"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb92"
+  },
+  "title": "React.js - Frontend Development",
+  "description": "Build modern web applications using React.js and component-based development.",
+  "category": "Web Development",
+  "image": "https://miro.medium.com/v2/resize:fit:1200/1*MF5V_dkybUTcfzwHFh0VSw.jpeg"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb93"
+  },
+  "title": "Django - Web Development with Python",
+  "description": "Create full-stack web applications using Django and PostgreSQL.",
+  "category": "Web Development",
+  "image": "https://tincode-django.s3.amazonaws.com/media/courses/4382943c-2f03-45ab-9a1e-b1968ae53b67.jpg"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb94"
+  },
+  "title": "C++ for Competitive Programming",
+  "description": "Master C++ for competitive coding with algorithms and data structures.",
+  "category": "Programming",
+  "image": "https://avatars.mds.yandex.net/i?id=5557a0396180351514da31c82e311b09_l-9029853-images-thumbs&n=13"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb95"
+  },
+  "title": "AI-Powered Chatbots with Python",
+  "description": "Learn how to build AI chatbots using NLP and machine learning.",
+  "category": "AI & Machine Learning",
+  "image": "https://images.prismic.io/meltwater/9678570e-1547-4732-833d-dab699b4a853_Blog-34.webp?auto=compress,format&amp;rect=0,31,1500,750&amp;w=1200&amp;h=600"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb96"
+  },
+  "title": "DevOps & CI/CD Pipelines",
+  "description": "Automate software deployment using DevOps tools like Docker, Kubernetes, and Jenkins.",
+  "category": "DevOps",
+  "image": "https://i.pinimg.com/originals/eb/a0/45/eba045b39659fd0e3ceca8acb7d0beee.jpg"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb97"
+  },
+  "title": "Full-Stack JavaScript (MERN Stack)",
+  "description": "Build full-stack applications using MongoDB, Express.js, React.js, and Node.js.",
+  "category": "Web Development",
+  "image": "https://i.ytimg.com/vi/IeCmesZ3Sps/maxresdefault.jpg"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb98"
+  },
+  "title": "Game Development with Unity",
+  "description": "Create 2D and 3D games using Unity and C#.",
+  "category": "Game Development",
+  "image": "https://overclockers.ru/st/legacy/blog/417293/418142_O.jpg"
+},
+{
+  "_id": {
+    "$oid": "67b85a9cf513fa617c4eeb99"
+  },
+  "title": "Big Data Analytics with Apache Spark",
+  "description": "Analyze large datasets using Apache Spark and Hadoop.",
+  "category": "Big Data",
+  "image": "https://miro.medium.com/v2/resize:fit:1200/0*KXRBfBIz57gDtEpa.png"
+}]

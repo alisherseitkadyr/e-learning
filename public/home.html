@@ -56,9 +56,8 @@
     
     
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
         const token = localStorage.getItem("token");
-
+        document.addEventListener("DOMContentLoaded", () => {
         if (token) {
             document.getElementById("login-link").style.display = "none";
             document.getElementById("profile-link").style.display = "block";
@@ -75,7 +74,12 @@
             const coursesDiv = document.getElementById('courses');
             coursesDiv.innerHTML = '';
     
-            courses.forEach(course => {
+            for (const course of courses) {
+                const response = await fetch(`http://localhost:5000/enrolled/${course._id}`, {
+                    headers: { 'Authorization': `Bearer ${token}` }
+                });
+                const enrolled=await response.json();
+                console.log(enrolled)
                 const div = document.createElement('div');
                 div.className = 'course-card';
                 div.innerHTML=``
@@ -85,10 +89,14 @@
                 div.innerHTML += `
                     <h3>${course.title}</h3>
                     <p>${course.description}</p>
-                    <button class="enroll-btn" onclick="enroll('${course._id}')">Enroll Now</button>
                 `;
+                if(enrolled.enrolled){
+                    div.innerHTML+=`<button class="enrolled-btn">Already enrolled</button>`
+                }else {
+                    div.innerHTML+=`<button class="enroll-btn" onClick="enroll('${course._id}')">Enroll Now</button>`
+                }
                 coursesDiv.appendChild(div);
-            });
+            }
         }
 
         loadCourses();

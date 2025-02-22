@@ -148,7 +148,15 @@ body {
 .enroll-btn:hover {
     background: #27ae60;
 }
-
+.enrolled-btn {
+    background: #b2e4c4;
+    padding: 8px 15px;
+    color: white;
+    border: none;
+    cursor:not-allowed;
+    border-radius: 5px;
+    margin-top: 10px;
+}
 /* Profile Page */
 .profile-container {
     display: flex;

@@ -19,6 +19,7 @@ function enroll(courseId) {
     .then(data => {
         if (data.message) {
             alert(data.message);
+            location.reload();
         } else {
             alert('Enrollment failed');
         }

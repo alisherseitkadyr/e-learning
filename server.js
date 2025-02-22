@@ -99,6 +99,20 @@ app.get('/enrolled',authMiddleware, async (req,res) =>{
         res.status(500).json({ message: "Server error", error: error.message });
     }
 });
+app.get('/enrolled/:courseId', authMiddleware, async (req,res) =>{
+    try{
+        const courseId=req.params.courseId;
+        const userId = req.user.userId;
+        const enrollment=await Enrollment.findOne({courseId: courseId,userId:userId})
+        if(enrollment) {
+            res.json({message:"enrolled",enrolled:true})
+        }else{
+            res.json({message:"Not enrolled",enrolled:false})
+        }
+    } catch (error){
+        res.status(500).json({ message: "Server error", error: error.message });
+    }
+})
 app.get('/lesson/:courseId', async (req, res) => {
     try {
         console.log("Requested Course ID:", req.params.courseId);
