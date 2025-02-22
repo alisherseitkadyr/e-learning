@@ -108,13 +108,13 @@ document.addEventListener("DOMContentLoaded", async function () {
         document.getElementById("lesson-description").textContent = lesson.description;
         document.getElementById("video-section").innerHTML = `<iframe src="${lesson.videoUrl}" allowfullscreen></iframe>`;
 
-        loadQuiz(lesson.quiz);
+        loadQuiz(lesson.quiz,courseId);
     } catch (error) {
         console.error("Error fetching lessons:", error);
     }
 });
 
-function loadQuiz(quiz) {
+function loadQuiz(quiz,course) {
     const quizSection = document.getElementById("quiz-section");
     quizSection.innerHTML = "";
 
@@ -136,7 +136,7 @@ function loadQuiz(quiz) {
         quizSection.appendChild(questionDiv);
     });
 
-    document.getElementById("submit-btn").addEventListener("click", () => checkAnswers(quiz));
+    document.getElementById("submit-btn").addEventListener("click", () => checkAnswers(quiz,course));
 }
 
 function selectOption(event) {
@@ -148,14 +148,20 @@ function selectOption(event) {
     selectedOption.classList.add("selected");
 }
 
-function checkAnswers(quiz) {
+async function checkAnswers(quiz, course) {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        alert("Please log in first!");
+        window.location.href = 'auth.html';
+        return;
+    }
     const selectedAnswers = document.querySelectorAll(".quiz-option.selected");
 
     if (selectedAnswers.length !== quiz.length) {
         alert("Please answer all questions.");
         return;
     }
-    let correctAmount=0
+    let correctAmount = 0
     selectedAnswers.forEach(selected => {
         const questionIndex = selected.dataset.questionIndex;
         const optionIndex = selected.dataset.optionIndex;
@@ -166,16 +172,24 @@ function checkAnswers(quiz) {
 
         if (parseInt(optionIndex) === parseInt(correctIndex)) {
             selected.classList.add("correct");
-            correctAmount+=1;
+            correctAmount += 1;
         } else {
             selected.classList.add("incorrect");
         }
     });
-    document.querySelectorAll('.quiz-option').forEach(button=>{
-        button.disabled=true;
+    document.querySelectorAll('.quiz-option').forEach(button => {
+        button.disabled = true;
     })
-    document.getElementById(("submit-btn")).innerHTML =correctAmount+"/"+selectedAnswers.length;
+    document.getElementById(("submit-btn")).innerText = correctAmount + "/" + selectedAnswers.length;
     document.getElementById("submit-btn").disabled = true;
+    const data={courseId:course,progress:correctAmount/selectedAnswers.length*100}
+    const response = await fetch(`http://localhost:5000/progress`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json",
+            'Authorization': `Bearer ${token}`},
+        body: JSON.stringify(data),
+    });
+    console.log(response)
 }
 </script>
 
